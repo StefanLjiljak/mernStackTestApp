@@ -1,14 +1,21 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import React, { useEffect } from 'react';
 import AppNavbar from './components/AppNavbar';
 import ShoppingList from './components/ShoppingList';
-import { Provider } from 'react-redux';
-import store from './store';
 import ItemModal from './components/ItemModal';
 import { Container } from 'reactstrap';
 
-function App() {
+import { Provider } from 'react-redux';
+import store from './store';
+import { loadUser } from './actions/authActions';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+
+const App = () => {
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
+
   return (
     <Provider store={store}>
       <div className="App">
@@ -20,6 +27,6 @@ function App() {
       </div>
     </Provider>
   );
-}
+};
 
 export default App;
